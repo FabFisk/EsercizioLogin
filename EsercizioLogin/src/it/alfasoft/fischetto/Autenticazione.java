@@ -26,8 +26,6 @@ public class Autenticazione extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		HttpSession sessione = request.getSession();
-		sessione.setAttribute("user", username);
-		sessione.setAttribute("psw", password);
 		
 		PrintWriter writer = response.getWriter();
 		if(password.equals("123")){
