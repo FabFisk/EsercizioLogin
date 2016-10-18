@@ -3,6 +3,7 @@ package it.alfasoft.fischetto;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,14 +31,10 @@ public class Autenticazione extends HttpServlet {
 		
 		HttpSession sessione = request.getSession();
 		
-		if(!username.isEmpty() && username!= null){
-			if(uDAO.readUtente(username, password)){
-				response.sendRedirect("benvenuto.html");
-				sessione.setAttribute("user", username);
-				sessione.setAttribute("psw", password);
-			}else{
-				response.sendRedirect("login.html");
-			}
+		if(uDAO.readUtente(username, password)){
+			response.sendRedirect("benvenuto.html");
+		}else{
+			response.sendRedirect("login.html");
 		}
 	}
        
@@ -46,19 +43,13 @@ public class Autenticazione extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		HttpSession sessione = request.getSession();
-		
-		if(!username.isEmpty() && username!= null){
-			if(password.equals("123")){
-				response.sendRedirect("benvenuto.html");
-				sessione.setAttribute("user", username);
-				sessione.setAttribute("psw", password);
-			}else{
-				response.sendRedirect("login.html");
-			}
+		if(password.equals("123")){
+			RequestDispatcher rd = request.getRequestDispatcher("Redirect");
+			rd.forward(request, response);
+		}else{
+			response.sendRedirect("login.html");
 		}
 	}
 	
