@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.UtenteDAO;
 
@@ -29,8 +28,6 @@ public class Autenticazione extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		HttpSession sessione = request.getSession();
-		
 		if(uDAO.readUtente(username, password)){
 			response.sendRedirect("benvenuto.html");
 		}else{
@@ -46,10 +43,16 @@ public class Autenticazione extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		if(password.equals("123")){
+			PrintWriter wr = response.getWriter();
+			wr.println("Login eseguito:"+"</br>");
 			RequestDispatcher rd = request.getRequestDispatcher("Redirect");
-			rd.forward(request, response);
+			rd.include(request, response);
 		}else{
-			response.sendRedirect("login.html");
+			//response.sendRedirect("login.html");
+			RequestDispatcher rd2 = request.getRequestDispatcher("login.html");
+			PrintWriter wr = response.getWriter();
+			wr.println("Username o Password errata!");
+			rd2.include(request, response);
 		}
 	}
 	
