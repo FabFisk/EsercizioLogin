@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.Servizi;
-import dao.UtenteDAO;
 
 /**
  * Servlet implementation class Autenticazione
