@@ -27,11 +27,10 @@ public class Autenticazione extends HttpServlet {
 		
 		HttpSession sessione = request.getSession();
 		
-		if(password.equals("123")){
+		if(password.equals("123") && !username.isEmpty() && username!= null){
 			response.sendRedirect("benvenuto.html");
 			sessione.setAttribute("user", username);
 			sessione.setAttribute("psw", password);
-
 		}else{
 			response.sendRedirect("login.html");
 		}		
