@@ -37,9 +37,7 @@ public class Autenticazione extends HttpServlet {
 			writer.println(username);
 		}else{
 			response.sendRedirect("login.html");
-		}
-		
-		
+		}		
 	}
 
 }
