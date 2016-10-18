@@ -12,7 +12,7 @@ public class UtenteDAO {
 
 	//1- Create
 	//2- Read
-	public boolean readUtente(String nome, String cognome){
+	public boolean readUtente(String user, String psw){
 		boolean token = false;
 		Session session = HibernateUtil.openSession();
 		Transaction tx = null;
@@ -21,8 +21,8 @@ public class UtenteDAO {
 			tx.begin();
 			Query query = session
 					.createQuery("from Utente where nome=:nomeInserito and cognome=:cognomeInserito ");
-			query.setString("nomeInserito", nome);
-			query.setString("cognomeInserito", cognome);
+			query.setString("nomeInserito", user);
+			query.setString("cognomeInserito", psw);
 			Utente u = (Utente )query.uniqueResult();
 			if(u!=null){
 				token = true;

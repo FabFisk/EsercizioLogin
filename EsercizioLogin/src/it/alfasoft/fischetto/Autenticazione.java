@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.Servizi;
 import dao.UtenteDAO;
 
 /**
@@ -18,7 +19,7 @@ import dao.UtenteDAO;
 @WebServlet("/Autenticazione")
 public class Autenticazione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UtenteDAO uDAO = new UtenteDAO();
+	private Servizi s = new Servizi();
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +29,7 @@ public class Autenticazione extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		if(uDAO.readUtente(username, password)){
+		if(s.controllaCredenziali(username, password)){
 			response.sendRedirect("benvenuto.html");
 		}else{
 			response.sendRedirect("login.html");
