@@ -30,9 +30,15 @@ public class Autenticazione extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		if(s.controllaCredenziali(username, password)){
-			response.sendRedirect("benvenuto.html");
+			PrintWriter wr = response.getWriter();
+			wr.println("Login eseguito:"+"</br>");
+			RequestDispatcher rd = request.getRequestDispatcher("Redirect");
+			rd.include(request, response);
 		}else{
-			response.sendRedirect("login.html");
+			RequestDispatcher rd2 = request.getRequestDispatcher("login.html");
+			PrintWriter wr = response.getWriter();
+			wr.println("Username o Password errata!");
+			rd2.include(request, response);
 		}
 	}
        
